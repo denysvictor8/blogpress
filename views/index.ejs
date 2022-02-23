@@ -1,0 +1,35 @@
+<%- include ("partials/header.ejs") %>
+<%- include("partials/homenavbar.ejs") %>
+
+<body>
+    <div class="container mt-3 mb-4">
+        <div class="jumbotron bg-dark text-white p-3">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">Sejam bem vindos a plataforma blogpress feito com o s2</p>
+            <hr class="my-4">
+        </div>
+        <% artigos.forEach( artigo => { %>
+        <div class="card mt-4">
+            <div class="card-header">
+                <h1>
+                    <%- artigo.titulo %>
+                </h1>
+            </div>
+            <div class="card-body">
+                <%- artigo.descricao %>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-success" href="/<%= artigo.slug %>"> Ler artigo </a>
+            </div>
+        </div>
+        <% }) %>
+        
+    </div>
+    <div class="container">
+        <a href="/artigos/pagina/2" style="float:right;">
+            <button class="btn btn-dark mt- mb-3">Proxima</button>
+        </a>
+    </div>
+</body>
+    
+<%- include ("partials/footer.ejs") %>

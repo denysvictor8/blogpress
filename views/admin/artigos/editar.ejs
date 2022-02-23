@@ -1,0 +1,55 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+<br>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Editar artigo</h1>
+        </div>
+        <div class="card-body">
+            <form action="/artigos/atualizar" method="POST" onsubmit="confirmarAtualizar(event, this)">
+                <label for="">Titulo da categoria:</label>
+                <input class="form-control" type="text" name="titulo" value="<%- artigo.titulo %>">
+                <br>
+                <textarea class="form-control" name="descricao" id="descricao" rows="12"> <%= artigo.descricao %> </textarea>
+                <label>Selecione a categoria:</label>
+                <select name="categoria" class="form-control">
+                    <% categorias.forEach( categoria => { %>
+                        <% if (categoria.id == artigo.categoriaId) { %> 
+                            <option value="<%= categoria.id %>" selected> <%= categoria.titulo %> </option>
+                        <% } else{ %> 
+                            <option value="<%= categoria.id %>" name="categoriaId" > <%= categoria.titulo %> </option>
+                        <% } %>
+                    <% }) %>
+                </select>
+                <input type="hidden" value="<%- artigo.id %>" name="id">
+                <br><br>
+                <button class="btn btn-success">Atualizar</button>
+                <a href="/admin/artigos" class="btn btn-warning">Voltar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../../partials/footer.ejs') %>
+
+<script>
+    function confirmarAtualizar(event, form){
+        event.preventDefault();
+        var decisao = confirm("Quer alterar esse item?");
+        if (decisao) {
+            form.submit();
+        }
+    }     
+</script>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        language: 'pt_BR',
+        selector: '#descricao',
+        plugins: ['wordcount hr fullscreen code emoticons media table paste']
+        // para mais visite: https://www.tiny.cloud/docs/plugins/opensource/
+    });
+</script>

@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark bg-primary p-3">
+    <a class="navbar-brand" href="/">
+        Blogpress
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <% categorias.forEach( categoria => { %>
+        <div class="navbar-nav">
+            <a class="nav-link" href="/categoria/<%= categoria.slug %>"> <%= categoria.titulo %> </a>
+        </div>
+        <% }) %>
+    </div>
+</nav>

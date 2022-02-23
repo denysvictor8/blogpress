@@ -1,0 +1,32 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+<br>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Ola mundo</h1>
+        </div>
+        <div class="card-body">
+            <form action="/categorias/atualizar" method="POST" onsubmit="confirmarAtualizar(event, this)">
+                <label for="">Titulo da categoria:</label>
+                <input type="text" value="<%- categoria.titulo %>" name="titulo">
+                <input type="hidden" value="<%- categoria.id %>" name="id">
+                <br><br>
+                <button class="btn btn-success">Atualizar</button>
+                <a href="/admin/categorias" class="btn btn-warning">Voltar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+
+<script>
+    function confirmarAtualizar(event, form){
+        event.preventDefault();
+        var decisao = confirm("Quer alterar esse item?");
+        if (decisao) {
+            form.submit();
+        }
+    }     
+</script>

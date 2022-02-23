@@ -1,0 +1,54 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+
+<div class="container mt-3 mb-4">
+    <div class="card">
+        <div class="card-header">
+            <h1>Usuarios</h1>
+        </div>
+        <div class="container">
+            <br>
+            <a class="btn btn-success" href="/admin/usuarios/novo">Cadastrar usuario</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th class="col-sm-1 col-md-1 col-lg-2">id</th>
+                    <th class="col-sm-5 col-md-4 col-lg-4">nome</th>
+                    <th class="col-sm-4 col-md-3 col-lg-3">email</th>
+                    <th class="col-sm-2 col-md-4 col-lg-3">opções</th>
+                </tr>
+                <%  usuarios.forEach( usuario => { %>
+                <tr>
+                    <td><%= usuario.id %></td>
+                    <td><%= usuario.nome %></td>
+                    <td><%= usuario.email %></td>
+                    <td>
+                        <form action="/admin/usuario/editar/<%= usuario.id %>" method="GET" style="display: inline;">
+                            <button class="btn btn-warning" >Editar</button>
+                        </form>
+                        <form action="/usuarios/remover" method="POST" onsubmit="confirmarDelete(event, this)" style="display: inline;">
+                            <input type="hidden" name="id" value="<%= usuario.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+
+<script>
+    function confirmarDelete(event, form){
+        event.preventDefault();
+        var decisao = confirm("Quer REMOVER esse item?");
+        if (decisao) {
+            form.submit();
+        }
+    }     
+</script>
+
+

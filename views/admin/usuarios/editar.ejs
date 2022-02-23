@@ -1,0 +1,33 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+
+<div class="container mt-3 mb-4">
+    <div class="card">
+        <div class="card-header">
+            <h1>Editar usuario</h1>
+        </div>
+        <div class="card-body">
+            <form action="/usuarios/atualizar" method="POST" onsubmit="confirmarEdit(event, this)">
+                <input type="text" class="form-control" name="nome" value="<%= artigo.nome %>">
+                <br>
+                <input type="text" class="form-control" name="email" value="<%= artigo.email %>">
+                <br>
+                <input type="hidden" value="<%= artigo.id %>" name="id">
+                <button class="btn btn-success">Editar</button>
+                <a class="btn btn-warning" href="/admin/usuarios">Voltar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+
+<script>
+    function confirmarEdit(event, form){
+        event.preventDefault();
+        var decisao = confirm("Quer editar esse item?");
+        if (decisao) {
+            form.submit();
+        }
+    }     
+</script>

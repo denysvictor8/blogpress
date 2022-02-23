@@ -1,0 +1,23 @@
+<%- include ("partials/header.ejs") %>
+<%- include ("partials/homenavbar.ejs") %>
+
+<body>
+    <div class="container mt-3 mb-4">
+        <div class="card mt-4">
+            <div class="card-header">
+                <h1>
+                    <%- artigo.titulo %>
+                </h1>
+            </div>
+            <div class="card-body">
+                <%- artigo.descricao %>
+            </div>
+        </div>
+        <br>
+        <a href="/">
+            <button class="btn btn-warning">voltar</button>
+        </a>
+    </div>
+</body>
+    
+<%- include ("partials/footer.ejs") %>

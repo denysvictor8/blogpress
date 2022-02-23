@@ -1,0 +1,58 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+
+<div class="container mt-3 mb-4">
+    <div class="card">
+        <div class="card-header">
+            <h1>Artigos</h1>
+        </div>
+        <div class="container">
+            <br>
+            <a class="btn btn-success" href="/admin/artigos/novo">Cadastrar artigo</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% artigos.forEach( artigo => { %>
+                    <tr>
+                        <td scope="row"> <%= artigo.id %></td>
+                        <td scope="row" class="col-sm-2 col-md-2"> <%= artigo.titulo %></td>
+                        <td scope="row" class="col-sm-3 col-md-4"> <%- artigo.descricao %></td>
+                        <td scope="row" class="col-sm-2 col-md-2"> <%= artigo.categoria.titulo %></td>
+                        <td scope="row" class="col-sm-2 col-md-3">
+                            <form action="/admin/artigos/editar/<%= artigo.id %>" method="GET" style="display: inline;">
+                                <button class="btn btn-warning">Editar</button>
+                            </form>
+                            <form action="/artigos/deletar" method="POST" style="display: inline;" onsubmit="confirmarDelete(event, this)">
+                                <input type="hidden" name="id" value="<%= artigo.id %>">
+                                <button class="btn btn-danger">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+
+<script>
+    function confirmarDelete(event, form){
+        event.preventDefault();
+        var decisao = confirm("Quer deletar esse item?");
+        if (decisao) {
+            form.submit();
+        }
+    }     
+</script>
